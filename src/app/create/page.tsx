@@ -68,7 +68,7 @@ export default function CreatePage() {
     }
 
     const { formId } = await res.json();
-    router.push(`/form?id=${formId}`);
+    window.open(`/form?id=${formId}`, "_blank");
   }
 
   return (
