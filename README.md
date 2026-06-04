@@ -49,7 +49,8 @@ The app will be available at [http://localhost:3000](http://localhost:3000).
 | Route | Purpose |
 |---|---|
 | `/create` | Build a form - add questions, choose types, set required flags |
-| `/form?id={uuid}` | Fill out and submit a form |
+| `/form/{formId}` | Fill out and submit a form |
+| `/submissions/{formId}` | View submission data for a form |
 
 ### Dependencies
 
