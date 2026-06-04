@@ -22,7 +22,9 @@ function formatDate(date: Date): string {
   });
 }
 
-export default async function SubmissionsPage({ params }: SubmissionsPageProps) {
+export default async function SubmissionsPage({
+  params,
+}: SubmissionsPageProps) {
   const { formId } = await params;
 
   if (!UUID_REGEX.test(formId)) {
@@ -117,12 +119,12 @@ export default async function SubmissionsPage({ params }: SubmissionsPageProps) 
                         <td className="whitespace-nowrap px-4 py-3 text-gray-500 dark:text-neutral-400">
                           {formatDate(submission.submittedAt)}
                         </td>
-                        {formQuestions.map((q) => (
+                        {formQuestions.map((questions) => (
                           <td
-                            key={q.id}
+                            key={questions.id}
                             className="px-4 py-3 text-gray-800 dark:text-neutral-200"
                           >
-                            {formatValue(submissionAnswers?.get(q.id))}
+                            {formatValue(submissionAnswers?.get(questions.id))}
                           </td>
                         ))}
                       </tr>

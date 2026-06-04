@@ -4,8 +4,6 @@ import { forms, questions } from "@/db/schema";
 import { createFormSchema } from "@/lib/validators";
 import { ApiError } from "@/lib/constants";
 
-export const dynamic = "force-dynamic";
-
 export async function POST(req: NextRequest) {
   let body: unknown;
   try {
