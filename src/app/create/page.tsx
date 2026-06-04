@@ -1,6 +1,5 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { useForm, useFieldArray, Resolver } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CreateFormInput, createFormSchema } from "@/lib/validators";
@@ -12,8 +11,6 @@ import { Textarea } from "@/components/ui/Textarea";
 import { Label } from "@/components/ui/Label";
 
 export default function CreatePage() {
-  const router = useRouter();
-
   function defaultQuestion(
     position: number,
   ): CreateFormInput["questions"][number] {
@@ -68,7 +65,7 @@ export default function CreatePage() {
     }
 
     const { formId } = await res.json();
-    window.open(`/form?id=${formId}`, "_blank");
+    window.open(`/form/${formId}`, "_blank");
   }
 
   return (

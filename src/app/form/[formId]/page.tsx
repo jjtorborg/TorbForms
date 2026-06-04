@@ -8,18 +8,18 @@ import { UUID_REGEX } from "@/lib/constants";
 export const dynamic = "force-dynamic";
 
 interface FormPageProps {
-  searchParams: Promise<{ id?: string }>;
+  params: Promise<{ formId: string }>;
 }
 
-export default async function FormPage({ searchParams }: FormPageProps) {
-  const { id } = await searchParams;
+export default async function FormPage({ params }: FormPageProps) {
+  const { formId } = await params;
 
-  if (!id || !UUID_REGEX.test(id)) {
+  if (!UUID_REGEX.test(formId)) {
     notFound();
   }
 
   const db = getDb();
-  const [form] = await db.select().from(forms).where(eq(forms.id, id));
+  const [form] = await db.select().from(forms).where(eq(forms.id, formId));
 
   if (!form) {
     notFound();
@@ -28,7 +28,7 @@ export default async function FormPage({ searchParams }: FormPageProps) {
   const formQuestions = await db
     .select()
     .from(questions)
-    .where(eq(questions.formId, id))
+    .where(eq(questions.formId, formId))
     .orderBy(asc(questions.position));
 
   return (

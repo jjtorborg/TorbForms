@@ -1,3 +1,4 @@
+import { QuestionType } from "@/lib/constants";
 import {
   pgTable,
   uuid,
@@ -11,17 +12,19 @@ import {
 } from "drizzle-orm/pg-core";
 
 export const questionTypeEnum = pgEnum("question_type", [
-  "free_response",
-  "single_choice_dropdown",
-  "single_choice_radio",
-  "multiple_choice",
+  QuestionType.FreeResponse,
+  QuestionType.SingleChoiceDropdown,
+  QuestionType.SingleChoiceRadio,
+  QuestionType.MultipleChoice,
 ]);
 
 export const forms = pgTable("forms", {
   id: uuid("id").primaryKey().defaultRandom(),
   title: text("title").notNull(),
   description: text("description"),
-  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  createdAt: timestamp("created_at", { withTimezone: true })
+    .notNull()
+    .defaultNow(),
 });
 
 export const questions = pgTable(
@@ -38,7 +41,7 @@ export const questions = pgTable(
     position: integer("position").notNull(),
     options: jsonb("options").$type<string[]>(),
   },
-  (columns) => [unique().on(columns.formId, columns.position)]
+  (columns) => [unique().on(columns.formId, columns.position)],
 );
 
 export const submissions = pgTable("submissions", {
@@ -46,7 +49,9 @@ export const submissions = pgTable("submissions", {
   formId: uuid("form_id")
     .notNull()
     .references(() => forms.id, { onDelete: "cascade" }),
-  submittedAt: timestamp("submitted_at", { withTimezone: true }).notNull().defaultNow(),
+  submittedAt: timestamp("submitted_at", { withTimezone: true })
+    .notNull()
+    .defaultNow(),
 });
 
 export const answers = pgTable("answers", {

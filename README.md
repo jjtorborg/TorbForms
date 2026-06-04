@@ -62,7 +62,7 @@ The app will be available at [http://localhost:3000](http://localhost:3000).
 | `@neondatabase/serverless` | Postgres driver | Uses HTTP transport instead of persistent TCP - required for serverless DB |
 | `zod` | Validation | Schema declared once in `validators.ts`, used on both the client and server |
 | `react-hook-form` | Form state | Uncontrolled inputs with minimal re-renders |
-| `@hookform/resolvers` | RHF ↔ Zod bridge | Passes Zod schemas directly to RHF resolver |
+| `@hookform/resolvers` | RHF - Zod bridge | Passes Zod schemas directly to RHF resolver |
 | `next-themes` | Dark mode | Persists preference to `localStorage` |
 | `tailwindcss` v4 | Styling | Easy to integrate, wraps standard CSS |
 | `dotenv` | Env loading for CLI | `drizzle-kit` runs outside Next.js and needs explicit `.env` loading |
