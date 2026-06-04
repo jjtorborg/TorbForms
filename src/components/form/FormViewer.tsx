@@ -9,6 +9,7 @@ import { FormHeader } from "./FormHeader";
 import { QuestionField } from "./QuestionField";
 import { SubmissionSuccess } from "./SubmissionSuccess";
 import { Button } from "@/components/ui/Button";
+import { useUnsavedChanges } from "@/hooks/useUnsavedChanges";
 
 interface FormViewerProps {
   form: Form;
@@ -24,12 +25,14 @@ export function FormViewer({ form, questions }: FormViewerProps) {
   const {
     control,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors, isSubmitting, isDirty },
   } = useForm<Record<string, string | string[]>>({
     resolver: zodResolver(schema) as Resolver<
       Record<string, string | string[]>
     >,
   });
+
+  useUnsavedChanges(isDirty && !submitted);
 
   async function onSubmit(data: Record<string, string | string[]>) {
     setSubmitError(null);

@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { useForm, useFieldArray, Resolver } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CreateFormInput, createFormSchema } from "@/lib/validators";
@@ -9,8 +10,11 @@ import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { Textarea } from "@/components/ui/Textarea";
 import { Label } from "@/components/ui/Label";
+import { useUnsavedChanges } from "@/hooks/useUnsavedChanges";
 
 export default function CreatePage() {
+  const [formCreated, setFormCreated] = useState(false);
+
   function defaultQuestion(
     position: number,
   ): CreateFormInput["questions"][number] {
@@ -28,7 +32,7 @@ export default function CreatePage() {
     register,
     control,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors, isSubmitting, isDirty },
   } = useForm<CreateFormInput>({
     resolver: zodResolver(createFormSchema) as Resolver<CreateFormInput>,
     defaultValues: {
@@ -42,6 +46,8 @@ export default function CreatePage() {
     control,
     name: "questions",
   });
+
+  useUnsavedChanges(isDirty && !formCreated);
 
   async function onSubmit(data: CreateFormInput) {
     const payload: CreateFormInput = {
@@ -65,6 +71,7 @@ export default function CreatePage() {
     }
 
     const { formId } = await res.json();
+    setFormCreated(true);
     window.open(`/form/${formId}`, "_blank");
   }
 

@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Providers } from "@/components/Providers";
-import { ThemeToggle } from "@/components/ThemeToggle";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -14,10 +13,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning className="h-full antialiased">
+    <html lang="en" className="h-full antialiased">
       <body className="min-h-full flex flex-col">
         <Providers>
-          <ThemeToggle />
           {children}
         </Providers>
       </body>
