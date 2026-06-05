@@ -114,7 +114,7 @@ src/
 
 `options` and `value` are stored as `jsonb` so the schema works across question types - choice questions store a `string[]`, text questions store a plain `string`.
 
-## Piorities
+## Priorities
 
 0. Meta priorities
     - Make something actually useful
