@@ -23,3 +23,16 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
   ),
 );
 Input.displayName = "Input";
+
+export const CheckboxInput = forwardRef<
+  HTMLInputElement,
+  InputHTMLAttributes<HTMLInputElement>
+>(({ className = "", ...props }, ref) => (
+  <input
+    type="checkbox"
+    ref={ref}
+    {...props}
+    className={`h-4 w-4 cursor-pointer rounded border-gray-300 text-blue-600 focus:ring-blue-500 dark:border-neutral-700 ${className}`}
+  />
+));
+CheckboxInput.displayName = "CheckboxInput";

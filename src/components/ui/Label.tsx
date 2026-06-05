@@ -1,10 +1,10 @@
 import { LabelHTMLAttributes } from "react";
 
-interface LabelProps extends LabelHTMLAttributes<HTMLLabelElement> {
+type LabelProps = LabelHTMLAttributes<HTMLLabelElement> & {
   required?: boolean;
-}
+};
 
-export function Label({
+export function FieldLabel({
   required,
   children,
   className = "",
@@ -19,6 +19,21 @@ export function Label({
       {required && (
         <span className="ml-1 text-red-500 dark:text-red-400">*</span>
       )}
+    </label>
+  );
+}
+
+export function CheckboxLabel({
+  children,
+  className = "",
+  ...props
+}: LabelHTMLAttributes<HTMLLabelElement>) {
+  return (
+    <label
+      {...props}
+      className={`flex cursor-pointer items-center gap-2 ${className}`}
+    >
+      {children}
     </label>
   );
 }

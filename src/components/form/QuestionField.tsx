@@ -3,9 +3,9 @@
 import { Control, Controller, FieldErrors } from "react-hook-form";
 import { Question } from "@/db/schema";
 import { QuestionType } from "@/lib/constants";
-import { Label } from "@/components/ui/Label";
+import { FieldLabel } from "@/components/ui/Label";
 import { Textarea } from "@/components/ui/Textarea";
-import { Select } from "@/components/ui/Select";
+import { Dropdown } from "@/components/ui/Dropdown";
 import { RadioGroup } from "@/components/ui/RadioGroup";
 import { CheckboxGroup } from "@/components/ui/CheckboxGroup";
 
@@ -26,7 +26,7 @@ export function QuestionField({
 
   return (
     <div className="space-y-2">
-      <Label required={question.required}>{question.label}</Label>
+      <FieldLabel required={question.required}>{question.label}</FieldLabel>
       {question.description && (
         <p className="text-xs text-gray-500 dark:text-neutral-500">
           {question.description}
@@ -51,9 +51,9 @@ export function QuestionField({
 
             case QuestionType.SingleChoiceDropdown:
               return (
-                <Select
+                <Dropdown
                   value={field.value as string}
-                  onChange={(event) => field.onChange(event.target.value)}
+                  onChange={field.onChange}
                   options={options.map((option) => ({
                     value: option,
                     label: option,

@@ -8,7 +8,7 @@ import { buildViewSchema, SubmitFormInput } from "@/lib/validators";
 import { FormHeader } from "./FormHeader";
 import { QuestionField } from "./QuestionField";
 import { SubmissionSuccess } from "./SubmissionSuccess";
-import { Button } from "@/components/ui/Button";
+import { SubmitButton } from "@/components/ui/Button";
 import { useUnsavedChanges } from "@/hooks/useUnsavedChanges";
 
 interface FormViewerProps {
@@ -84,9 +84,9 @@ export function FormViewer({ form, questions }: FormViewerProps) {
           </p>
         )}
 
-        <Button type="submit" disabled={isSubmitting} className="w-full">
+        <SubmitButton type="submit" disabled={isSubmitting} className="w-full">
           {isSubmitting ? "Submitting..." : "Submit"}
-        </Button>
+        </SubmitButton>
       </form>
     </div>
   );

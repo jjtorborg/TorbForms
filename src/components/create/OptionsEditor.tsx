@@ -2,7 +2,7 @@
 
 import { UseFormRegisterReturn } from "react-hook-form";
 import { Input } from "@/components/ui/Input";
-import { Button } from "@/components/ui/Button";
+import { ActionButton, AddItemButton } from "@/components/ui/Button";
 
 interface OptionsEditorProps {
   fields: { id: string }[];
@@ -30,27 +30,25 @@ export function OptionsEditor({
             {...registerOption(index)}
             placeholder={`Option ${index + 1}`}
           />
-          <Button
+          <ActionButton
             type="button"
-            variant="transparent-background"
             className="shrink-0 px-1 text-red-500 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300"
             onClick={() => remove(index)}
           >
             ✕
-          </Button>
+          </ActionButton>
         </div>
       ))}
       {error && (
         <p className="text-xs text-red-500 dark:text-red-400">{error}</p>
       )}
-      <Button
+      <AddItemButton
         type="button"
-        variant="secondary"
         className="text-xs"
         onClick={() => append("")}
       >
         + Add option
-      </Button>
+      </AddItemButton>
     </div>
   );
 }

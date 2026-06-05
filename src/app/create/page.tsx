@@ -6,10 +6,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { CreateFormInput, createFormSchema } from "@/lib/validators";
 import { QuestionType } from "@/lib/constants";
 import { QuestionCard } from "@/components/create/QuestionCard";
-import { Button } from "@/components/ui/Button";
+import { SubmitButton, AddItemButton } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { Textarea } from "@/components/ui/Textarea";
-import { Label } from "@/components/ui/Label";
+import { FieldLabel } from "@/components/ui/Label";
 import { useUnsavedChanges } from "@/hooks/useUnsavedChanges";
 
 export default function CreatePage() {
@@ -90,9 +90,9 @@ export default function CreatePage() {
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
           <div className="rounded-lg border border-gray-200 bg-gray-50 p-5 shadow-sm space-y-4 dark:border-neutral-800 dark:bg-neutral-900">
             <div className="space-y-1">
-              <Label htmlFor="title" required>
+              <FieldLabel htmlFor="title" required>
                 Form title
-              </Label>
+              </FieldLabel>
               <Input
                 id="title"
                 placeholder="e.g. Fall Semester Student Enrollment"
@@ -101,7 +101,7 @@ export default function CreatePage() {
               />
             </div>
             <div className="space-y-1">
-              <Label htmlFor="description">Description (optional)</Label>
+              <FieldLabel htmlFor="description">Description (optional)</FieldLabel>
               <Textarea
                 id="description"
                 placeholder="Collect information from incoming students for the upcoming semester."
@@ -139,18 +139,17 @@ export default function CreatePage() {
               />
             ))}
 
-            <Button
+            <AddItemButton
               type="button"
-              variant="secondary"
               onClick={() => append(defaultQuestion(fields.length))}
             >
               + Add question
-            </Button>
+            </AddItemButton>
           </div>
 
-          <Button type="submit" disabled={isSubmitting} className="w-full">
+          <SubmitButton type="submit" disabled={isSubmitting} className="w-full">
             {isSubmitting ? "Creating..." : "Create form"}
-          </Button>
+          </SubmitButton>
         </form>
       </div>
     </main>

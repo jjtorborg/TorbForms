@@ -13,10 +13,10 @@ import {
 } from "react-hook-form";
 import { CreateFormInput } from "@/lib/validators";
 import { QuestionType } from "@/lib/constants";
-import { Input } from "@/components/ui/Input";
+import { Input, CheckboxInput } from "@/components/ui/Input";
 import { Textarea } from "@/components/ui/Textarea";
-import { Label } from "@/components/ui/Label";
-import { Button } from "@/components/ui/Button";
+import { FieldLabel, CheckboxLabel } from "@/components/ui/Label";
+import { ActionButton } from "@/components/ui/Button";
 import { Dropdown } from "@/components/ui/Dropdown";
 import { OptionsEditor } from "./OptionsEditor";
 
@@ -74,39 +74,36 @@ export function QuestionCard({
           Question {index + 1}
         </span>
         <div className="flex items-center gap-1">
-          <Button
+          <ActionButton
             type="button"
-            variant="transparent-background"
             className="px-2 py-1 text-xs"
             onClick={onMoveUp}
             disabled={isFirst}
           >
             ↑
-          </Button>
-          <Button
+          </ActionButton>
+          <ActionButton
             type="button"
-            variant="transparent-background"
             className="px-2 py-1 text-xs"
             onClick={onMoveDown}
             disabled={isLast}
           >
             ↓
-          </Button>
-          <Button
+          </ActionButton>
+          <ActionButton
             type="button"
-            variant="transparent-background"
             className="px-2 py-1 text-xs text-red-500 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300"
             onClick={onRemove}
           >
             Remove
-          </Button>
+          </ActionButton>
         </div>
       </div>
 
       <div className="space-y-1">
-        <Label htmlFor={`q-label-${index}`} required>
+        <FieldLabel htmlFor={`q-label-${index}`} required>
           Question label
-        </Label>
+        </FieldLabel>
         <Input
           id={`q-label-${index}`}
           placeholder="e.g. What grade level is the student enrolling in?"
@@ -116,7 +113,9 @@ export function QuestionCard({
       </div>
 
       <div className="space-y-1">
-        <Label htmlFor={`q-desc-${index}`}>Description (optional)</Label>
+        <FieldLabel htmlFor={`q-desc-${index}`}>
+          Description (optional)
+        </FieldLabel>
         <Textarea
           id={`q-desc-${index}`}
           placeholder="e.g. Select the grade the student will be entering this fall."
@@ -127,9 +126,9 @@ export function QuestionCard({
 
       <div className="grid grid-cols-2 gap-4">
         <div className="space-y-1">
-          <Label htmlFor={`q-type-${index}`} required>
+          <FieldLabel htmlFor={`q-type-${index}`} required>
             Question type
-          </Label>
+          </FieldLabel>
           <Controller
             control={control}
             name={`questions.${index}.type`}
@@ -147,16 +146,12 @@ export function QuestionCard({
         </div>
 
         <div className="flex items-end pb-1">
-          <label className="flex items-center gap-2 cursor-pointer">
-            <input
-              type="checkbox"
-              {...register(`questions.${index}.required`)}
-              className="h-4 w-4 cursor-pointer rounded border-gray-300 text-blue-600 focus:ring-blue-500 dark:border-neutral-700"
-            />
+          <CheckboxLabel>
+            <CheckboxInput {...register(`questions.${index}.required`)} />
             <span className="text-sm text-gray-700 dark:text-neutral-300">
               Required
             </span>
-          </label>
+          </CheckboxLabel>
         </div>
       </div>
 

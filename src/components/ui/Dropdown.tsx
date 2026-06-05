@@ -12,14 +12,16 @@ interface DropdownProps {
   value: string;
   onChange: (value: string) => void;
   id?: string;
+  placeholder?: string;
+  error?: string;
 }
 
-export function Dropdown({ options, value, onChange, id }: DropdownProps) {
+export function Dropdown({ options, value, onChange, id, placeholder, error }: DropdownProps) {
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
   const selectedLabel =
-    options.find((option) => option.value === value)?.label ?? "";
+    options.find((option) => option.value === value)?.label ?? placeholder ?? "";
 
   useEffect(() => {
     if (!isOpen) return;
@@ -44,9 +46,9 @@ export function Dropdown({ options, value, onChange, id }: DropdownProps) {
         onClick={() => setIsOpen((prev) => !prev)}
         aria-haspopup="listbox"
         aria-expanded={isOpen}
-        className="flex w-full cursor-pointer items-center justify-between rounded-md border border-gray-300 bg-white px-3 py-2 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-100"
+        className={`flex w-full cursor-pointer items-center justify-between rounded-md border bg-white px-3 py-2 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-neutral-800 dark:text-neutral-100 ${error ? "border-red-500 dark:border-red-500" : "border-gray-300 dark:border-neutral-700"}`}
       >
-        <span>{selectedLabel}</span>
+        <span className={!value ? "text-gray-400 dark:text-neutral-500" : ""}>{selectedLabel}</span>
         <svg
           className={`h-4 w-4 shrink-0 text-gray-400 transition-transform dark:text-neutral-500 ${isOpen ? "rotate-180" : ""}`}
           xmlns="http://www.w3.org/2000/svg"
@@ -60,6 +62,8 @@ export function Dropdown({ options, value, onChange, id }: DropdownProps) {
           />
         </svg>
       </button>
+
+      {error && <p className="mt-1 text-xs text-red-500">{error}</p>}
 
       {isOpen && (
         <ul
