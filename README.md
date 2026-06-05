@@ -114,6 +114,21 @@ src/
 
 `options` and `value` are stored as `jsonb` so the schema works across question types - choice questions store a `string[]`, text questions store a plain `string`.
 
+## Piorities
+
+0. Meta priorities
+    - Make something actually useful
+    - Learn unfamiliar modern technologies
+1. Web accessibility
+2. Robust form data implementation
+3. UI
+
+Beyond this was considered out of scope.
+
+4. Identity layer
+5. Image/video embedding
+6. File uploading
+
 ## Approach
 
 ### Web Accessibility
@@ -121,13 +136,19 @@ I wanted to provide web accessibility for this project, but **fast, easy and che
 
 An obvious tradeoff is heavy **vendor lock-in**, making it harder to migrate if needed. Another downside is **cost to scale**. Hobby tiers are free... for now, but if this ever changed or the system were to grow in usage I'd have some decisions to make.
 
-### Robust Data Implementation
+### Robust Form Data
 For this project to be useful despite the short development timeline, the **data schema and form validation** had to be rock solid. I spent a lot of time planning the table structure and considering options for DB and form management frameworks. Went with Drizzle ORM/SDK for its simplicity, serverless Postgres compatibility, and especially query manager which parameterizes **"queries as code"** server-side.
 
 I was unfamiliar with the latest in React form management and did some research into popular modern libraries. React-Hook-Form paired with the Zod validator was a commonly recommended option. This simplified state management (uncontrolled inputs), and allowed the same form validation to be used on both client and server. It also made available nice features like required questions, preventing empty options, etc.
 
 ### UI
-I'm not a designer, but had a good experience with Tailwind building my portfolio website. A lot of the work here was "outsourced", but I tried to keep things simple. Also never could say no to a dark theme.
+I'm not a designer, but had a good experience with Tailwind building my portfolio website. A lot of the work here was "outsourced", but I tried to keep things simple.
+
+After completing the core features/priorities, and with the decision made on what to consider out of scope, I was able to turn my attention to some various UI quality of life improvements. These included:
+
+- A warning when attempting to exit form creation or submission with unsaved changes.
+- Light/dark theme toggle
+- Question reordering
 
 ## Extensions
 
@@ -142,3 +163,6 @@ It would be nice to be able to add images or videos to the forms. Would require 
 
 ### File Uploading
 This would be very useful for forms that require additional documents like resumes, receipts, certificates, etc. Another opportunity for blob storage.
+
+### Saving Form Drafts
+A new feature could be the ability to save a form client side without needing to submit yet.
