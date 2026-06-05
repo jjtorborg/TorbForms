@@ -121,7 +121,7 @@ src/
     - Learn unfamiliar modern technologies
 1. Web accessibility
 2. Robust form data implementation
-3. UI
+3. Simple polished UI
 
 Beyond this was considered out of scope.
 
@@ -141,14 +141,14 @@ For this project to be useful despite the short development timeline, the **data
 
 I was unfamiliar with the latest in React form management and did some research into popular modern libraries. React-Hook-Form paired with the Zod validator was a commonly recommended option. This simplified state management (uncontrolled inputs), and allowed the same form validation to be used on both client and server. It also made available nice features like required questions, preventing empty options, etc.
 
-### UI
+### Simple Polished UI
 I'm not a designer, but had a good experience with Tailwind building my portfolio website. A lot of the work here was "outsourced", but I tried to keep things simple.
 
 After completing the core features/priorities, and with the decision made on what to consider out of scope, I was able to turn my attention to some various UI quality of life improvements. These included:
 
 - A warning when attempting to exit form creation or submission with unsaved changes.
-- Light/dark theme toggle
 - Question reordering
+- Light/dark theme toggle
 
 ## Extensions
 
